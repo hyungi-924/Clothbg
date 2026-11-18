@@ -495,7 +495,7 @@ async function startProcessing() {
     } catch (err) {
       console.error(err);
       p.status = 'error';
-      p.error = (err && err.message ? err.message : '').slice(0, 60);
+      p.error = (err && err.message ? err.message : '').slice(0, 120);
     }
     if (currentRoute() === 'result') render();
   }

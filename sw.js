@@ -5,7 +5,7 @@
 // '인터넷 먼저, 안 되면 저장본' 방식이라 코드를 고치면 바로 반영돼요.
 // =========================================================
 
-const CACHE = 'clothbg-v1';
+const CACHE = 'clothbg-v2';
 const APP_FILES = [
   './',
   './index.html',
@@ -14,6 +14,7 @@ const APP_FILES = [
   './db.js',
   './ai.js',
   './compose.js',
+  './bg-removal.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',

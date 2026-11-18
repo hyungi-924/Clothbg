@@ -12,8 +12,10 @@
 // 중요: 이 AI는 '배경만 투명하게' 지웁니다. 옷 픽셀의 색은 건드리지 않아요.
 // =========================================================
 
-// 버전을 고정해 두면 라이브러리가 갑자기 바뀌어 고장 나는 일을 막을 수 있어요.
-const LIB_URL = 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm';
+// AI 라이브러리(@imgly/background-removal 1.4.5)를 파일 하나로 묶어 내 사이트에 함께 올렸어요.
+// 외부 CDN에서 불러올 때 아이패드 Safari에서 실패하는 문제를 막기 위해서예요.
+// AI 모델 파일은 처음 실행 때 라이브러리 제작사 서버(staticimgly.com)에서 받아와요.
+const LIB_URL = './bg-removal.js';
 
 let libPromise = null;
 
@@ -22,7 +24,9 @@ function loadLib() {
   if (!libPromise) {
     libPromise = import(LIB_URL).catch((err) => {
       libPromise = null; // 실패하면 다음에 다시 시도할 수 있게
-      throw new Error('AI 엔진을 불러오지 못했어요. 인터넷 연결을 확인하세요.');
+      console.error(err);
+      // 원인을 알 수 있게 실제 오류 내용도 함께 보여줌
+      throw new Error(`AI 엔진 로드 실패 (${String(err && err.message || err).slice(0, 80)})`);
     });
   }
   return libPromise;
